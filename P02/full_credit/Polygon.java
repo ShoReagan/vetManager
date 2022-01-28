@@ -24,9 +24,7 @@ public class Polygon {
     double getPerimeter() {
         return perimeter;
     }
-}
 
-class testPolygon {
     public static void main(String[] args) {
         Scanner sideLength = new Scanner(System.in);
         Polygon polygon = new Polygon(0, 0);
