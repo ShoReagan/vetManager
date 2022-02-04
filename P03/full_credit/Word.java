@@ -3,7 +3,7 @@ public class Word {
 
     public Word(String word) {
         for(int i = 0; i < 5; i++) {
-            letters[i] = word.charAt(i);
+            this.letters[i] = word.charAt(i);
         }
     }
 
