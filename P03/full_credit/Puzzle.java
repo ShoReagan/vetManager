@@ -10,7 +10,6 @@ public class Puzzle {
     }
     
     public boolean isSolved() {
-        System.out.println(solution.toString());
         return solved;
     }
 

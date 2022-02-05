@@ -1,16 +1,20 @@
-public class Puzzle{
-    Word solution = new Word();
-    boolean solved = new boolean();
+public class Puzzle {
+
+    private boolean solved = false;
+    private Word solution = new Word("-----");
 
     public Puzzle(String solution) {
-        for(int i = 0; i < 5; i++) {
-            this.solution[i] = solution[i];
+        for(int i = 0; i < 5; i++){
+            this.solution.setCharAt(solution.charAt(i), i);
         }
     }
-
-    public boolean solved() {
+    
+    public boolean isSolved() {
         return solved;
     }
+
+
+
 
 // Add this method to your own Puzzle.java implementation if you like.
 // Depends on your Word class implementation that accepts a-z A-Z . and space.
@@ -57,3 +61,4 @@ public class Puzzle{
         return result.toString();
     }
 }
+
