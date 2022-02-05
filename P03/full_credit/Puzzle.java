@@ -1,15 +1,16 @@
 public class Puzzle {
 
     private boolean solved = false;
-    private String ans = new String();
+    private Word solution = new Word("-----");
 
     public Puzzle(String solution) {
-       this.ans = solution;
+        for(int i = 0; i < 5; i++){
+            this.solution.setCharAt(solution.charAt(i), i);
+        }
     }
     
-    private Word solution = new Word(ans);
-    
     public boolean isSolved() {
+        System.out.println(solution.toString());
         return solved;
     }
 

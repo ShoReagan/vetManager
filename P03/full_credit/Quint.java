@@ -16,9 +16,9 @@ public class Quint {
 
         guess = scanner.nextLine();
 
-        do {
+        while(puzzle.isSolved() == false) {
             System.out.print(puzzle.compareGuess(guess) + " ");
             guess = scanner.nextLine();
-        } while(puzzle.isSolved() == false);
+        }
     }
 }
