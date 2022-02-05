@@ -1,7 +1,7 @@
 public class Word {
     private char[] letters = new char[5];
 
-    public Word(String word) {
+    public Word(String word) { 
         for(int i = 0; i < 5; i++) {
             this.letters[i] = word.charAt(i);
         }

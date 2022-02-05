@@ -1,7 +1,7 @@
 public class Puzzle {
 
     private boolean solved = false;
-    private Word solution = new Word("-----");
+    private Word solution = new Word("ABCDE");
 
     public Puzzle(String solution) {
         for(int i = 0; i < 5; i++){

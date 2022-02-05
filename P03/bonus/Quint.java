@@ -5,7 +5,7 @@ public class Quint {
         Scanner scanner = new Scanner(System.in);
         WordList word = new WordList();
         Puzzle puzzle = new Puzzle(word.getWord());
-        String guess = new String();
+        String guess = new String("AAAAA");
         int counter = 1;
 
         System.out.println("=========");
@@ -14,17 +14,20 @@ public class Quint {
         System.out.println("Guess a 5-letter word");
         System.out.print("guess ");
         
-
-        guess = scanner.nextLine();
-
-        while(true) {
-            System.out.print(puzzle.compareGuess(guess.toUpperCase()) + " ");
-            if(puzzle.isSolved() == true){
-                System.out.println("Guessed in " + counter + " tries");
-                break;
-            }
+        try {
             guess = scanner.nextLine();
-            counter++;
+            while(true) {
+                System.out.print(puzzle.compareGuess(guess.toUpperCase()) + " ");
+                if(puzzle.isSolved() == true){
+                    System.out.println("Guessed in " + counter + " tries");
+                    break;
+                }
+                guess = scanner.nextLine();
+                counter++;
+            }
+        }
+        catch(IllegalArgumentException e) {
+            System.out.println(e);
         }
     }
 }

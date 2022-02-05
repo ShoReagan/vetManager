@@ -14,17 +14,16 @@ public class Quint {
         System.out.println("Guess a 5-letter word");
         System.out.print("guess ");
         
-
-        guess = scanner.nextLine();
-
-        while(true) {
-            System.out.print(puzzle.compareGuess(guess.toUpperCase()) + " ");
-            if(puzzle.isSolved() == true){
-                System.out.println("Guessed in " + counter + " tries");
-                break;
-            }
             guess = scanner.nextLine();
-            counter++;
-        }
+
+            while(true) {
+                System.out.print(puzzle.compareGuess(guess.toUpperCase()) + " ");
+                if(puzzle.isSolved() == true){
+                    System.out.println("Guessed in " + counter + " tries");
+                    break;
+                }
+                guess = scanner.nextLine();
+                counter++;
+            }
     }
 }
