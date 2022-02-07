@@ -13,14 +13,14 @@ public class Quint {
         System.out.println("=========\n");
         System.out.println("Guess a 5-letter word");
         System.out.print("guess ");
-        
+    while(true){
         try {
             guess = scanner.nextLine();
             while(true) {
                 System.out.print(puzzle.compareGuess(guess.toUpperCase()) + " ");
                 if(puzzle.isSolved() == true){
                     System.out.println("Guessed in " + counter + " tries");
-                    break;
+                    System.exit(0);
                 }
                 guess = scanner.nextLine();
                 counter++;
@@ -28,6 +28,8 @@ public class Quint {
         }
         catch(IllegalArgumentException e) {
             System.out.println(e);
+            System.out.print("guess: ");
         }
+    }
     }
 }

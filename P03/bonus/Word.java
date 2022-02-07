@@ -5,13 +5,13 @@ public class Word {
         if(word.length() != 5){
             throw new IllegalArgumentException("The parameter is not exactly 5 characters");
         }
-        for(int j = 0; j < 5; j++) {
-            if(validateChar(word.charAt(j)) == false){
+        for(int i = 0; i < 5; i++) {
+            if(validateChar(word.charAt(i)) == true || word.charAt(i) == '.'){
+                this.letters[i] = word.charAt(i);
+            }
+            else {
                 throw new IllegalArgumentException("Any character in the word is not between A-Z inclusive");
             }
-        }
-        for(int i = 0; i < 5; i++) {
-            this.letters[i] = word.charAt(i);
         }
     }
 
@@ -25,11 +25,13 @@ public class Word {
         if(position < 0 || position > 4)
             throw new IllegalArgumentException("The position parameter is not 0-4 inclusive");
         for(int j = 0; j < 5; j++) {
-            if(validateChar(c) == false){
+            if(validateChar(c) == true || c == '.' || c == ' '){
+                letters[position] = c;
+            }
+            else {
                 throw new IllegalArgumentException("Any character in the word is not between A-Z inclusive");
             }
         }
-        letters[position] = c;
     }
 
     public String toString() {
