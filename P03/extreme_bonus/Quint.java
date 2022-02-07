@@ -31,7 +31,7 @@ public class Quint {
                     else if(Character.isUpperCase(str.charAt(i)) == true)
                         System.out.print(ANSI_GREEN_BACKGROUND + str.charAt(i) + ANSI_RESET);
                     else
-                        System.out.print(ANSI_BLACK_BACKGROUND + str.charAt(i) + ANSI_RESET);     
+                        System.out.print(ANSI_BLACK_BACKGROUND + " " + ANSI_RESET);     
                 }
                 System.out.print(" ");
                 if(puzzle.isSolved() == true){
