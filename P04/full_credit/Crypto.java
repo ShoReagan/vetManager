@@ -22,7 +22,7 @@ public class Crypto {
                     else if(choice == 'd'){
                         System.out.println("Enter text to decrypt");
                         String txt = new String(strscanner.nextLine());
-                        System.out.println(sub.decrypt(sub.encrypt(txt)));
+                        System.out.println(sub.decrypt(txt));
                     }
                     else if(choice == 'q')
                         System.exit(1);

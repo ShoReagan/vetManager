@@ -1,4 +1,4 @@
-public class Substitution extends Cypher {
+public class Substitution implements Cypher {
     private char[] encryptKey = new char[26];
     private char[] decryptKey = new char[26];
 
@@ -14,9 +14,12 @@ public class Substitution extends Cypher {
         for(int k = 0; k < 26; k++) {
             this.encryptKey[k] = key.charAt(k);
         }
-        this.decryptKey = "abcdefghijklmnopqrstuvwxyz".toCharArray();
+        for(int n = 0; n < 26; n++) {
+            this.decryptKey[key.charAt(n) - 'a'] = (char)('a' + n);
+        }
     }
 
+    @Override
     public String encrypt(String unencrypted) {
         StringBuilder ans = new StringBuilder(unencrypted);
 
@@ -33,6 +36,7 @@ public class Substitution extends Cypher {
         return ans.toString();
     }
 
+    @Override
     public String decrypt(String encrypted) {
         StringBuilder ans = new StringBuilder(encrypted);
 
