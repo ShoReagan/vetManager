@@ -6,6 +6,8 @@ import javax.swing.JComboBox;
 import javax.swing.JSpinner;
 import javax.swing.JOptionPane;
 import javax.swing.SpinnerModel;
+import javax.swing.SpinnerNumberModel;
+import javax.swing.JTextField;
 import shelter.Cat;
 import shelter.Dog;
 import shelter.Shelter;
@@ -16,18 +18,18 @@ import shelter.Animal;
 
 public class MainWin extends JFrame {
     private Shelter shelter;
-    private JLabel label = new JLabel();
+    private JLabel data = new JLabel();
     
     public MainWin(String title) {
         this.shelter = new Shelter(title);
 
-        JButton dogButton = new JButton("DDD");
+        JButton dogButton = new JButton("DOG");
         dogButton.setBounds(20, 20, 50, 50);
         dogButton.addActionListener(event -> onNewDogClick());
         dogButton.setBorder(null);
         add(dogButton);
 
-        JButton catButton = new JButton("CCC");
+        JButton catButton = new JButton("CAT");
         catButton.setBounds(20, 100, 50, 50);
         catButton.addActionListener(event -> onNewCatClick());
         catButton.setBorder(null);
@@ -48,20 +50,29 @@ public class MainWin extends JFrame {
     }
 
     public void onNewDogClick() {
-        JLabel name = new JLabel("<HTML><br/>Name</HTML>");
-        names = new JtextField(20);
+        JTextField names;
+        JComboBox genders;
+        JSpinner ages;
 
-        JLabel gender = new JLabel("<HTML><br/>Gender</HTML>");
-        String[] genders = {"Male", "Female"};
-        genders = new JComboBox<String>(gender.txt);
+        JLabel name = new JLabel("<HTML><br/>name</HTML>");
+        names = new JTextField(20);
 
-        JLabel age = new JLabel("<HTML><br/>Age</HTML>");
+        JLabel gender = new JLabel("<HTML><br/>gender</HTML>");
+
+        String[] gender_choices = {"Male", "Female"};
+        genders = new JComboBox<String>(gender_choices);
+
+        JLabel age = new JLabel("<HTML><br/>age</HTML>");
 
         SpinnerModel range = new SpinnerNumberModel(0, 0, 100, 1);
-        ages = new jSpinner(range);
-        
-        
-        System.out.println("DOG");
+        ages = new JSpinner(range);
+
+        Object[] objects = {name, names, gender, genders, age, ages};
+
+        int button = JOptionPane.showConfirmDialog(this, objects,"New Animal", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(button == JOptionPane.OK_OPTION) {
+            JOptionPane.showMessageDialog(this, names.getText() + genders.getSelectedItem() + ages.getValue());
+        }
     }
 
     public void onNewCatClick() {
