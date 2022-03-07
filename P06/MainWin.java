@@ -31,6 +31,10 @@ public class MainWin extends JFrame {
         ImageIcon dogIcon = new ImageIcon("dog.png");
         ImageIcon catIcon = new ImageIcon("cat.jfif");
 
+        JLabel img = new JLabel();
+        img.setIcon(dogIcon);
+        add(img);
+
         JMenuBar menuBar = new JMenuBar();
 
 
@@ -145,8 +149,6 @@ public class MainWin extends JFrame {
     }
 
     public void onAboutClick() {
-        JOptionPane.showMessageDialog(null, "Dog icon credit to: https://www.google.com/imgres?imgurl=https%3A%2F%2Fiheartcraftythings.com%2Fwp-content%2Fuploads%2F2021%2F04%2FDog-DRAWING-%25E2%2580%2593-STEP-10.jpg&imgrefurl=https%3A%2F%2Fiheartcraftythings.com%2Fdog-drawing.html&tbnid=bbsHCAvqbR4NRM&vet=12ahUKEwjD7Mv-h7X2AhWHmWoFHbvfCLgQMygOegUIARD7AQ..i&docid=yxXsJdWTlClniM&w=1000&h=1400&q=dog%20drawing&ved=2ahUKEwjD7Mv-h7X2AhWHmWoFHbvfCLgQMygOegUIARD7AQ\nCat icon credit to: https://helloartsy.com/cat-drawing-for-kids/");
-        updateDisplay();
     }
 
     public void onQuitClick() {
