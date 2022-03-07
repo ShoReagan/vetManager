@@ -16,6 +16,7 @@ import shelter.CatBreed;
 import shelter.Gender;
 import shelter.Animal;
 import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon;
 
 public class MainWin extends JFrame {
     private Shelter shelter;
@@ -24,14 +25,17 @@ public class MainWin extends JFrame {
     public MainWin(String title) {
         this.shelter = new Shelter(title);
 
-        JButton dogButton = new JButton("DOG");
-        dogButton.setBounds(20, 20, 50, 50);
+        ImageIcon dogIcon = new ImageIcon("dog.png");
+        ImageIcon catIcon = new ImageIcon("cat.jfif");
+
+        JButton dogButton = new JButton(dogIcon);
+        dogButton.setBounds(20, 20, 100, 100);
         dogButton.addActionListener(event -> onNewDogClick());
         dogButton.setBorder(null);
         add(dogButton);
 
-        JButton catButton = new JButton("CAT");
-        catButton.setBounds(20, 100, 50, 50);
+        JButton catButton = new JButton(catIcon);
+        catButton.setBounds(20, 100, 100, 100);
         catButton.addActionListener(event -> onNewCatClick());
         catButton.setBorder(null);
         add(catButton);
@@ -82,9 +86,14 @@ public class MainWin extends JFrame {
 
         int button = JOptionPane.showConfirmDialog(this, objects,"New Animal", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(button == JOptionPane.OK_OPTION) {
-            Dog dog = new Dog(DogBreed.valueOf((String)breeds.getSelectedItem()), name.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
+            Dog dog = new Dog(DogBreed.valueOf((String)breeds.getSelectedItem()), names.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
             shelter.addAnimal(dog);
-            data.setText(shelter.toString() + "\n");
+            data.setText("<html>" + shelter.toString()
+                               .replaceAll("<","&lt;")
+                               .replaceAll(">", "&gt;")
+                               .replaceAll("\n", "<br/>")
+                      + "</html>");
+                      updateDisplay();
         }
             
     }
@@ -119,7 +128,12 @@ public class MainWin extends JFrame {
         if(button == JOptionPane.OK_OPTION) {
             Cat cat = new Cat(CatBreed.valueOf((String)breeds.getSelectedItem()), name.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
             shelter.addAnimal(cat);
-            data.setText(shelter.toString() + "\n");
+            data.setText("<html>" + shelter.toString()
+                               .replaceAll("<","&lt;")
+                               .replaceAll(">", "&gt;")
+                               .replaceAll("\n", "<br/>")
+                      + "</html>");
+            updateDisplay();
         }  
     }
 
@@ -132,6 +146,7 @@ public class MainWin extends JFrame {
     }
 
     private void updateDisplay() {
-        SwingUtilities.updateComponentTreeUI(data);
+        data.setVisible(false);
+        data.setVisible(true);
     }
 }
