@@ -17,6 +17,9 @@ import shelter.Gender;
 import shelter.Animal;
 import javax.swing.SwingUtilities;
 import javax.swing.ImageIcon;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
 
 public class MainWin extends JFrame {
     private Shelter shelter;
@@ -28,26 +31,30 @@ public class MainWin extends JFrame {
         ImageIcon dogIcon = new ImageIcon("dog.png");
         ImageIcon catIcon = new ImageIcon("cat.jfif");
 
-        JButton dogButton = new JButton(dogIcon);
-        dogButton.setBounds(20, 20, 100, 100);
-        dogButton.addActionListener(event -> onNewDogClick());
-        dogButton.setBorder(null);
-        add(dogButton);
+        JMenuBar menuBar = new JMenuBar();
 
-        JButton catButton = new JButton(catIcon);
-        catButton.setBounds(20, 100, 100, 100);
-        catButton.addActionListener(event -> onNewCatClick());
-        catButton.setBorder(null);
-        add(catButton);
 
-        JButton aboutButton = new JButton("About");
-        aboutButton.setBounds(20, 180, 50, 50);
-        aboutButton.addActionListener(event -> onAboutClick());
-        aboutButton.setBorder(null);
-        add(aboutButton);
+        JMenu addAnimal = new JMenu("Add Animal");
+        JMenuItem catMenu = new JMenuItem("Cat");
+        JMenuItem dogMenu = new JMenuItem("Dog");
 
-        data.setBounds(200, 200, 200, 200);
-        //data.setBounds(null);
+        JMenu aboutMenu = new JMenu("About");
+
+        addAnimal.add(dogMenu);
+        addAnimal.add(catMenu);
+        menuBar.add(addAnimal);
+        menuBar.add(aboutMenu);
+
+        setJMenuBar(menuBar);
+        setVisible(true);
+
+        dogMenu.addActionListener(event -> onNewDogClick());
+
+        catMenu.addActionListener(event -> onNewCatClick());
+
+        aboutMenu.addActionListener(event -> onAboutClick());
+
+        data.setBounds(0, 0, 200, 200);
         add(data);
 
         setSize(200, 200);
@@ -126,7 +133,7 @@ public class MainWin extends JFrame {
 
         int button = JOptionPane.showConfirmDialog(this, objects,"New Animal", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(button == JOptionPane.OK_OPTION) {
-            Cat cat = new Cat(CatBreed.valueOf((String)breeds.getSelectedItem()), name.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
+            Cat cat = new Cat(CatBreed.valueOf((String)breeds.getSelectedItem()), names.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
             shelter.addAnimal(cat);
             data.setText("<html>" + shelter.toString()
                                .replaceAll("<","&lt;")
@@ -138,7 +145,8 @@ public class MainWin extends JFrame {
     }
 
     public void onAboutClick() {
-        System.out.println("ABOUT");
+        JOptionPane.showMessageDialog(null, "Dog icon credit to: https://www.google.com/imgres?imgurl=https%3A%2F%2Fiheartcraftythings.com%2Fwp-content%2Fuploads%2F2021%2F04%2FDog-DRAWING-%25E2%2580%2593-STEP-10.jpg&imgrefurl=https%3A%2F%2Fiheartcraftythings.com%2Fdog-drawing.html&tbnid=bbsHCAvqbR4NRM&vet=12ahUKEwjD7Mv-h7X2AhWHmWoFHbvfCLgQMygOegUIARD7AQ..i&docid=yxXsJdWTlClniM&w=1000&h=1400&q=dog%20drawing&ved=2ahUKEwjD7Mv-h7X2AhWHmWoFHbvfCLgQMygOegUIARD7AQ\nCat icon credit to: https://helloartsy.com/cat-drawing-for-kids/");
+        updateDisplay();
     }
 
     public void onQuitClick() {
