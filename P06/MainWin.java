@@ -15,6 +15,7 @@ import shelter.DogBreed;
 import shelter.CatBreed;
 import shelter.Gender;
 import shelter.Animal;
+import javax.swing.SwingUtilities;
 
 public class MainWin extends JFrame {
     private Shelter shelter;
@@ -41,10 +42,13 @@ public class MainWin extends JFrame {
         aboutButton.setBorder(null);
         add(aboutButton);
 
+        data.setBounds(200, 200, 200, 200);
+        //data.setBounds(null);
+        add(data);
+
         setSize(200, 200);
         setLayout(null);
         setVisible(true);
-
 
         onQuitClick();
 
@@ -61,7 +65,7 @@ public class MainWin extends JFrame {
 
         JLabel gender = new JLabel("<HTML><br/>Gender</HTML>");
 
-        String[] gender_choices = {"Male", "Female"};
+        String[] gender_choices = {"male", "female"};
         genders = new JComboBox<String>(gender_choices);
 
         JLabel breed = new JLabel("<HTML><br/>Breed</HTML>");
@@ -79,7 +83,8 @@ public class MainWin extends JFrame {
         int button = JOptionPane.showConfirmDialog(this, objects,"New Animal", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(button == JOptionPane.OK_OPTION) {
             Dog dog = new Dog(DogBreed.valueOf((String)breeds.getSelectedItem()), name.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
-            shelter.addAnimal(dog);        
+            shelter.addAnimal(dog);
+            data.setText(shelter.toString() + "\n");
         }
             
     }
@@ -95,7 +100,7 @@ public class MainWin extends JFrame {
 
         JLabel gender = new JLabel("<HTML><br/>Gender</HTML>");
 
-        String[] gender_choices = {"Male", "Female"};
+        String[] gender_choices = {"male", "female"};
         genders = new JComboBox<String>(gender_choices);
 
         JLabel breed = new JLabel("<HTML><br/>Breed</HTML>");
@@ -114,6 +119,7 @@ public class MainWin extends JFrame {
         if(button == JOptionPane.OK_OPTION) {
             Cat cat = new Cat(CatBreed.valueOf((String)breeds.getSelectedItem()), name.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
             shelter.addAnimal(cat);
+            data.setText(shelter.toString() + "\n");
         }  
     }
 
@@ -126,6 +132,6 @@ public class MainWin extends JFrame {
     }
 
     private void updateDisplay() {
-
+        SwingUtilities.updateComponentTreeUI(data);
     }
 }
