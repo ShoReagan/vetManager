@@ -15,6 +15,11 @@ import shelter.DogBreed;
 import shelter.CatBreed;
 import shelter.Gender;
 import shelter.Animal;
+import javax.swing.SwingUtilities;
+import javax.swing.ImageIcon;
+import javax.swing.JMenu;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
 
 public class MainWin extends JFrame {
     private Shelter shelter;
@@ -23,23 +28,38 @@ public class MainWin extends JFrame {
     public MainWin(String title) {
         this.shelter = new Shelter(title);
 
-        JButton dogButton = new JButton("DOG");
-        dogButton.setBounds(20, 20, 50, 50);
-        dogButton.addActionListener(event -> onNewDogClick());
-        dogButton.setBorder(null);
-        add(dogButton);
+        ImageIcon dogIcon = new ImageIcon("dog.png");
+        ImageIcon catIcon = new ImageIcon("cat.jfif");
 
-        JButton catButton = new JButton("CAT");
-        catButton.setBounds(20, 100, 50, 50);
-        catButton.addActionListener(event -> onNewCatClick());
-        catButton.setBorder(null);
-        add(catButton);
+        JLabel img = new JLabel();
+        img.setIcon(dogIcon);
+        add(img);
 
-        JButton aboutButton = new JButton("About");
-        aboutButton.setBounds(20, 180, 50, 50);
-        aboutButton.addActionListener(event -> onAboutClick());
-        aboutButton.setBorder(null);
-        add(aboutButton);
+        JMenuBar menuBar = new JMenuBar();
+
+
+        JMenu addAnimal = new JMenu("Add Animal");
+        JMenuItem catMenu = new JMenuItem("Cat");
+        JMenuItem dogMenu = new JMenuItem("Dog");
+
+        JMenu aboutMenu = new JMenu("About");
+
+        addAnimal.add(dogMenu);
+        addAnimal.add(catMenu);
+        menuBar.add(addAnimal);
+        menuBar.add(aboutMenu);
+
+        setJMenuBar(menuBar);
+        setVisible(true);
+
+        dogMenu.addActionListener(event -> onNewDogClick());
+
+        catMenu.addActionListener(event -> onNewCatClick());
+
+        aboutMenu.addActionListener(event -> onAboutClick());
+
+        data.setBounds(0, 0, 200, 200);
+        add(data);
 
         setSize(200, 200);
         setLayout(null);
@@ -52,35 +72,83 @@ public class MainWin extends JFrame {
     public void onNewDogClick() {
         JTextField names;
         JComboBox genders;
+        JComboBox breeds;
         JSpinner ages;
 
-        JLabel name = new JLabel("<HTML><br/>name</HTML>");
+        JLabel name = new JLabel("<HTML><br/>Name</HTML>");
         names = new JTextField(20);
 
-        JLabel gender = new JLabel("<HTML><br/>gender</HTML>");
+        JLabel gender = new JLabel("<HTML><br/>Gender</HTML>");
 
-        String[] gender_choices = {"Male", "Female"};
+        String[] gender_choices = {"male", "female"};
         genders = new JComboBox<String>(gender_choices);
 
-        JLabel age = new JLabel("<HTML><br/>age</HTML>");
+        JLabel breed = new JLabel("<HTML><br/>Breed</HTML>");
+
+        String[] breed_choices = {"Affenpinscher", "Akita", "basenji", "beagle", "bloodhound", "borzoi", "boxer", "briard"};
+        breeds = new JComboBox<String>(breed_choices);
+
+        JLabel age = new JLabel("<HTML><br/>Age</HTML>");
 
         SpinnerModel range = new SpinnerNumberModel(0, 0, 100, 1);
         ages = new JSpinner(range);
 
-        Object[] objects = {name, names, gender, genders, age, ages};
+        Object[] objects = {name, names, gender, genders, breed, breeds, age, ages};
 
         int button = JOptionPane.showConfirmDialog(this, objects,"New Animal", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
         if(button == JOptionPane.OK_OPTION) {
-            JOptionPane.showMessageDialog(this, names.getText() + genders.getSelectedItem() + ages.getValue());
+            Dog dog = new Dog(DogBreed.valueOf((String)breeds.getSelectedItem()), names.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
+            shelter.addAnimal(dog);
+            data.setText("<html>" + shelter.toString()
+                               .replaceAll("<","&lt;")
+                               .replaceAll(">", "&gt;")
+                               .replaceAll("\n", "<br/>")
+                      + "</html>");
+                      updateDisplay();
         }
+            
     }
 
     public void onNewCatClick() {
-        System.out.println("CAT");
+        JTextField names;
+        JComboBox genders;
+        JComboBox breeds;
+        JSpinner ages;
+
+        JLabel name = new JLabel("<HTML><br/>Name</HTML>");
+        names = new JTextField(20);
+
+        JLabel gender = new JLabel("<HTML><br/>Gender</HTML>");
+
+        String[] gender_choices = {"male", "female"};
+        genders = new JComboBox<String>(gender_choices);
+
+        JLabel breed = new JLabel("<HTML><br/>Breed</HTML>");
+
+        String[] breed_choices = {"Abyssinian", "Burmese" , "Himalayan" , "Manx" ,"Persian" ,"Siamese,Sphynx"};
+        breeds = new JComboBox<String>(breed_choices);
+
+        JLabel age = new JLabel("<HTML><br/>Age</HTML>");
+
+        SpinnerModel range = new SpinnerNumberModel(0, 0, 100, 1);
+        ages = new JSpinner(range);
+
+        Object[] objects = {name, names, gender, genders, breed, breeds, age, ages};
+
+        int button = JOptionPane.showConfirmDialog(this, objects,"New Animal", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(button == JOptionPane.OK_OPTION) {
+            Cat cat = new Cat(CatBreed.valueOf((String)breeds.getSelectedItem()), names.getText(), Gender.valueOf((String)genders.getSelectedItem()), (int) ages.getValue());
+            shelter.addAnimal(cat);
+            data.setText("<html>" + shelter.toString()
+                               .replaceAll("<","&lt;")
+                               .replaceAll(">", "&gt;")
+                               .replaceAll("\n", "<br/>")
+                      + "</html>");
+            updateDisplay();
+        }  
     }
 
     public void onAboutClick() {
-        System.out.println("ABOUT");
     }
 
     public void onQuitClick() {
@@ -88,6 +156,7 @@ public class MainWin extends JFrame {
     }
 
     private void updateDisplay() {
-
+        data.setVisible(false);
+        data.setVisible(true);
     }
 }
