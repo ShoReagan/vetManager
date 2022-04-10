@@ -25,6 +25,15 @@ class Color {
 
 int main() {
     Color red(255, 0, 0);
-    std::cout << red.to_string() << std::endl;
-    std::cout << red.colorize("RED") << std::endl; 
+    Color green(0, 255, 0);
+    Color blue(0, 0 , 255);
+    int r;
+    int g;
+    int b;
+
+    std::cout << red.colorize("RED") << " " <<  green.colorize("GREEN") << " " <<  blue.colorize("BLUE") << std::endl;
+    std::cout << "\n" << "Enter red, green, and blue ints: ";
+    std::cin >> r >> g >> b;
+    Color selected(r, g, b);
+    std::cout << selected.colorize(selected.to_string()) << std::endl;
 }
