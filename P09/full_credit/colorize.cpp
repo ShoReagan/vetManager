@@ -14,17 +14,17 @@ class Color {
             _blue = blue;
         }
         std::string to_string() {
-            return "(" + _red + "," + _green + "," + _blue + ")" + std::endl;
+            std::string result = "(" + std::to_string(_red) + "," + std::to_string(_green) + "," + std::to_string(_blue) + ")";
+            return result;
         }
         std::string colorize(std::string text) {
-            return "\033[38;2;" + _red + ";" + _green + ";" + _blue + "m"
-              + text             
-              + "\033[0m"              
-              + std::endl;
+            std::string colorized = "\033[38;2;" + std::to_string(_red) + ";" + std::to_string(_green) + ";" + std::to_string(_blue) + "m" + text + "\033[0m";
+            return colorized;
         }
-}
+};
 
 int main() {
     Color red(255, 0, 0);
+    std::cout << red.to_string() << std::endl;
     std::cout << red.colorize("RED") << std::endl; 
 }
