@@ -106,6 +106,8 @@ public class MainWin extends JFrame {// implements ActionListener {
         help.add(about);
         client.add(newClient);
         client.add(listClients);
+        client.add(adoptAnimal);
+        animal.add(listAdopted);
         
         menubar.add(file);
         menubar.add(animal);
@@ -209,8 +211,8 @@ public class MainWin extends JFrame {// implements ActionListener {
 
     // }
     protected void onAdoptAnimalClick() { 
-        String clientsString[];
-        String animalsString[];
+        String[] clientsString = new String[10];
+        String[] animalsString = new String[10];
         ListIterator<Client> clientIterator = shelter.clientListIterator();
         ListIterator<Animal> animalIterator = shelter.animalListIterator();
         int counter = 0;
@@ -228,7 +230,7 @@ public class MainWin extends JFrame {// implements ActionListener {
         JComboBox ani = new JComboBox(animalsString);
         
         Object[] objects = { // Array of widgets to display
-            clientsString, cli, animalsString, ani};
+            clientslist, cli, animalslist, ani};
         
         int button = JOptionPane.showConfirmDialog( // Show the dialog
             this,
