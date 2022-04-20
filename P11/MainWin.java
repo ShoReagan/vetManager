@@ -68,13 +68,15 @@ public class MainWin extends JFrame {// implements ActionListener {
         JMenuItem newDog     = new JMenuItem("New Dog");
         JMenuItem newCat     = new JMenuItem("New Cat");
         JMenuItem newPig     = new JMenuItem("New Pig");
-        JMenuItem listAnimals = new JMenuItem("List Animals");
+        JMenuItem listAnimals = new JMenuItem("List Available");
+        JMenuItem listAdopted = new JMenuItem("List Adopted");
         JMenu     help       = new JMenu("Help");
         JMenuItem rules      = new JMenuItem("Rules");
         JMenuItem about      = new JMenuItem("About");
         JMenu client = new JMenu("Client");
         JMenuItem newClient     = new JMenuItem("New Client");
         JMenuItem listClients     = new JMenuItem("List Client");
+        JMenuItem adoptAnimal = new JMenuItem("Adopt an Animal");
         
         quit  .addActionListener(event -> onQuitClick());
         newShelter  .addActionListener(event -> onNewShelterClick());
@@ -88,6 +90,8 @@ public class MainWin extends JFrame {// implements ActionListener {
         newClient.addActionListener(event -> onNewClientClick());
         listClients.addActionListener(event -> onListClientClick());
         listAnimals.addActionListener(event -> onListAnimalClick());
+        listAdopted.addActionListener(event -> onListAdoptedClick());
+        adoptAnimal.addActionListener(event -> onAdoptAnimalClick());
 
         file.add(newShelter);
         file.add(openShelter);
@@ -197,9 +201,49 @@ public class MainWin extends JFrame {// implements ActionListener {
     private JLabel phoneNumber = new JLabel("<HTML><br/>Phone Number</HTML>");
     private JTextField phoneNumbers = new JTextField(20);
 
+    private JLabel clientslist = new JLabel("Clients");
+    private JLabel animalslist = new JLabel("Animals");
+
     // private <T extends Animal> void newAnimal(T animal, JComboBox breeds) {
 
     // }
+    protected void onAdoptAnimalClick() { 
+        String clientsString[];
+        String animalsString[];
+        ListIterator<Client> clientIterator = shelter.clientListIterator();
+        ListIterator<Client> animalIterator = shelter.animalListIterator();
+        int counter = 0;
+        while(clientIterator.hasNext()) {
+            clientsString[counter] = clientIterator.next();
+            counter++;
+        }
+        counter = 0;
+        while(animalIterator.hasNext()) {
+            animalsString[counter] = animalIterator.next();
+            counter++;
+        }
+
+        JComboBox cli = new JComboBox(clientsString);
+        JComboBox ani = new JComboBox(animalsString);
+        
+        Object[] objects = { // Array of widgets to display
+            clientsList, cli, animalsList, ani};
+        
+        int button = JOptionPane.showConfirmDialog( // Show the dialog
+            this,
+            objects,
+            "New Adoption",
+            JOptionPane.OK_CANCEL_OPTION,
+            JOptionPane.QUESTION_MESSAGE);
+        if(button == JOptionPane.OK_OPTION) 
+            shelter.addAdoption(
+                new Dog((DogBreed) breeds.getSelectedItem(), names.getText(), 
+                        (Gender) genders.getSelectedItem(), (int) ages.getValue()
+                )
+            );
+        onListAnimalClick();
+        updateDisplay();
+    }
 
     protected void onNewDogClick() { 
         JComboBox breeds = new JComboBox(DogBreed.values());
@@ -321,6 +365,15 @@ public class MainWin extends JFrame {// implements ActionListener {
 
     protected void onListAnimalClick() {
         data.setText("<html>" + shelter.toString()
+                                       .replaceAll("<","&lt;")
+                                       .replaceAll(">", "&gt;")
+                                       .replaceAll("\n", "<br/>")
+                              + "</html>");
+        updateDisplay();
+    }
+
+    protected void onListAdoptedClick() {
+        data.setText("<html>" + shelter.adoptionsToString()
                                        .replaceAll("<","&lt;")
                                        .replaceAll(">", "&gt;")
                                        .replaceAll("\n", "<br/>")

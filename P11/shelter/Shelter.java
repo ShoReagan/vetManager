@@ -6,11 +6,15 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.File;
 import java.util.StringTokenizer;
+import java.util.HashMap;
+import java.util.ListIterator;
+import java.util.Iterator;
 
 public class Shelter {
     String name;
     ArrayList<Animal> animals = new ArrayList<>();
     ArrayList<Client> clients = new ArrayList<>();
+    HashMap<Animal, Client> adoptions = new HashMap<>();
     public Shelter(String name) {
         this.name = name;
     }
@@ -62,6 +66,22 @@ public class Shelter {
     public void addClient(Client client) {
         clients.add(client);
     }
+    public ListIterator<Client> clientListIterator() {
+        ListIterator<Client> clientIterator = clients.listIterator();
+        return clientIterator;
+    }
+    public ListIterator<Animal> animalListIterator() {
+        ListIterator<Animal> animalIterator = animals.listIterator();
+        return animalIterator;
+    }
+    // public ListIterator<Animal> adoptionsListIterator() {
+    //     ListIterator<Animal> adoptionsIterator = adoptions.keySet().listIterator();
+    //     return adoptionsIterator;
+    // }
+
+    public void adopt(Animal animal, Client client) {
+        adoptions.put(animal, client);
+    }
     public int numAnimals() {
         return animals.size();
     }
@@ -76,6 +96,9 @@ public class Shelter {
             first = false;
         }
         return result.toString();
+    }
+    public String adoptionsToString() {
+        return "1";
     }
     @Override
     public String toString() {
