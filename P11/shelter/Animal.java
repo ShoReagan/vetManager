@@ -18,7 +18,7 @@ public abstract class Animal {
     public Gender gender() {return gender;}
     public int age() {return age;}
     public String toString() {
-        return name + " (" + age + " year old " + gender;
+        return name + " " + age + " year old " + gender;
     }
     private String name;
     private Gender gender;

@@ -238,9 +238,17 @@ public class MainWin extends JFrame {// implements ActionListener {
             "New Adoption",
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE);
-        if(button == JOptionPane.OK_OPTION) 
-            //shelter.adopt(new Client("Jim", "1234"), new Dog() );
-        onListAnimalClick();
+        if(button == JOptionPane.OK_OPTION){
+            if(((String)ani.getSelectedItem()).contains("dog"))
+                shelter.adopt(shelter.returnDog((String)ani.getSelectedItem()), shelter.returnClient((String)cli.getSelectedItem()));
+            else if(((String)ani.getSelectedItem()).contains("cat"))
+                shelter.adopt(shelter.returnCat((String)ani.getSelectedItem()), shelter.returnClient((String)cli.getSelectedItem()));
+            else if(((String)ani.getSelectedItem()).contains("pig"))
+                shelter.adopt(shelter.returnPig((String)ani.getSelectedItem()), shelter.returnClient((String)cli.getSelectedItem()));
+
+            shelter.removeAnimal((String)ani.getSelectedItem());
+        }
+        onListAdoptedClick();
         updateDisplay();
     }
 

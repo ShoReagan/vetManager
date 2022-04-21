@@ -8,7 +8,9 @@ import java.io.File;
 import java.util.StringTokenizer;
 import java.util.HashMap;
 import java.util.ListIterator;
-import java.util.Iterator;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.StringTokenizer;
 
 public class Shelter {
     String name;
@@ -70,14 +72,81 @@ public class Shelter {
         ListIterator<Client> clientIterator = clients.listIterator();
         return clientIterator;
     }
+     public Dog returnDog(String values) {
+         StringTokenizer str = new StringTokenizer(values, " ");
+         String name = str.nextToken();
+         int age = Integer.parseInt(str.nextToken());
+         str.nextToken();
+         str.nextToken();
+         Gender gender = Gender.valueOf(str.nextToken());
+         DogBreed breed = DogBreed.valueOf(str.nextToken());
+
+        Dog dog = new Dog(breed, name, gender, age);
+
+        return dog;
+    }
+
+    public Cat returnCat(String values) {
+         StringTokenizer str = new StringTokenizer(values, " ");
+         String name = str.nextToken();
+         int age = Integer.parseInt(str.nextToken());
+         str.nextToken();
+         str.nextToken();
+         Gender gender = Gender.valueOf(str.nextToken());
+         CatBreed breed = CatBreed.valueOf(str.nextToken());
+
+        Cat dog = new Cat(breed, name, gender, age);
+
+        return dog;
+    }
+
+    public Pig returnPig(String values) {
+         StringTokenizer str = new StringTokenizer(values, " ");
+         String name = str.nextToken();
+         int age = Integer.parseInt(str.nextToken());
+         str.nextToken();
+         str.nextToken();
+         Gender gender = Gender.valueOf(str.nextToken());
+         PigBreed breed = PigBreed.valueOf(str.nextToken());
+
+        Pig dog = new Pig(breed, name, gender, age);
+
+        return dog;
+    }
+
+    public void removeAnimal(String values) {
+        StringTokenizer str = new StringTokenizer(values, " ");
+        String name = str.nextToken();
+        int index;
+        for(Animal a : animals) {
+            if(a.name().contains(name))
+                animals.remove(animals.indexOf(a));
+
+        }
+    }
+
+    public Client returnClient(String values) {
+         StringTokenizer str = new StringTokenizer(values, " ");
+         String name = str.nextToken();
+         String number = str.nextToken();
+
+        Client client = new Client(name, number);
+
+        return client;
+
+
+     }
     public ListIterator<Animal> animalListIterator() {
         ListIterator<Animal> animalIterator = animals.listIterator();
         return animalIterator;
     }
-    // public ListIterator<Animal> adoptionsListIterator() {
-    //     ListIterator<Animal> adoptionsIterator = adoptions.keySet().listIterator();
-    //     return adoptionsIterator;
-    // }
+    public ListIterator<Animal> adoptionsListIterator() {
+        Set<Animal> animalSet = new HashSet<>();
+        animalSet = adoptions.keySet();
+        ArrayList<Animal> animalslist = new ArrayList<>(animalSet);
+        ListIterator<Animal> adoptionsIterator = animalslist.listIterator();
+        return adoptionsIterator;
+    }
 
     public void adopt(Animal animal, Client client) {
         adoptions.put(animal, client);
@@ -98,7 +167,14 @@ public class Shelter {
         return result.toString();
     }
     public String adoptionsToString() {
-        return "1";
+        StringBuilder ans = new StringBuilder();
+        for(Animal a : adoptions.keySet()){
+            ans.append(a.toString());
+            ans.append(" ");
+            ans.append(adoptions.get(a).toString());
+            ans.append("\n");
+        } 
+        return ans.toString();
     }
     @Override
     public String toString() {

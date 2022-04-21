@@ -19,7 +19,7 @@ public class Cat extends Animal {
     }
     @Override
     public String toString() {
-        return super.toString() + " " + breed.name() + " cat)";
+        return super.toString() + " " + breed.name() + " cat";
     }
     //@Override
     // public void create(Object breed, String name, Gender gender, int age) {

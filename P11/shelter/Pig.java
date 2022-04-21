@@ -19,7 +19,7 @@ public class Pig extends Animal {
     }
     @Override
     public String toString() {
-        return super.toString() + " " + breed.name() + " pig)";
+        return super.toString() + " " + breed.name() + " pig";
     }
     //@Override
     // public void create(Object breed, String name, Gender gender, int age) {
