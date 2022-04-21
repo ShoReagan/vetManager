@@ -45,6 +45,7 @@ import shelter.PigBreed;
 import shelter.Cat;
 import shelter.CatBreed;
 import shelter.Gender;
+import java.util.ListIterator;
 
 public class MainWin extends JFrame {// implements ActionListener {
     public MainWin(String title) {
@@ -211,15 +212,15 @@ public class MainWin extends JFrame {// implements ActionListener {
         String clientsString[];
         String animalsString[];
         ListIterator<Client> clientIterator = shelter.clientListIterator();
-        ListIterator<Client> animalIterator = shelter.animalListIterator();
+        ListIterator<Animal> animalIterator = shelter.animalListIterator();
         int counter = 0;
         while(clientIterator.hasNext()) {
-            clientsString[counter] = clientIterator.next();
+            clientsString[counter] = clientIterator.next().toString();
             counter++;
         }
         counter = 0;
         while(animalIterator.hasNext()) {
-            animalsString[counter] = animalIterator.next();
+            animalsString[counter] = animalIterator.next().toString();
             counter++;
         }
 
@@ -227,7 +228,7 @@ public class MainWin extends JFrame {// implements ActionListener {
         JComboBox ani = new JComboBox(animalsString);
         
         Object[] objects = { // Array of widgets to display
-            clientsList, cli, animalsList, ani};
+            clientsString, cli, animalsString, ani};
         
         int button = JOptionPane.showConfirmDialog( // Show the dialog
             this,
@@ -236,11 +237,7 @@ public class MainWin extends JFrame {// implements ActionListener {
             JOptionPane.OK_CANCEL_OPTION,
             JOptionPane.QUESTION_MESSAGE);
         if(button == JOptionPane.OK_OPTION) 
-            shelter.addAdoption(
-                new Dog((DogBreed) breeds.getSelectedItem(), names.getText(), 
-                        (Gender) genders.getSelectedItem(), (int) ages.getValue()
-                )
-            );
+            //shelter.adopt(new Client("Jim", "1234"), new Dog() );
         onListAnimalClick();
         updateDisplay();
     }
