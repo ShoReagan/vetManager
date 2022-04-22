@@ -58,6 +58,12 @@ public class Shelter {
             bw.write("" + "client" + '\n');
             bw.write("" + i.toString() + '\n');
         }
+        ListIterator<Client> clientIterator = clients.listIterator();
+        String x = new String();
+        while(clientIterator.hasNext()){ 
+            x = clientIterator.next()
+            bw.write("" + x + '\n');
+        }
     }
     public String name() {
         return name;
