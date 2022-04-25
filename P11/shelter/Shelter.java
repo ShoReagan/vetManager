@@ -58,6 +58,7 @@ public class Shelter {
             bw.write("" + "client" + '\n');
             bw.write("" + i.toString() + '\n');
         }
+        
     }
     public String name() {
         return name;
@@ -170,7 +171,7 @@ public class Shelter {
         StringBuilder ans = new StringBuilder();
         for(Animal a : adoptions.keySet()){
             ans.append(a.toString());
-            ans.append(" ");
+            ans.append(" adopted by ");
             ans.append(adoptions.get(a).toString());
             ans.append("\n");
         } 
