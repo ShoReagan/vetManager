@@ -34,18 +34,27 @@ public class Shelter {
             else if (dogOrCat.contains("Pig")) {
                 animals.add(new Pig(PigBreed.valueOf(br.readLine()), br.readLine(), Gender.valueOf(br.readLine()), Integer.parseInt(br.readLine())));
             }
-            else
+            else if(dogOrCat.contains("client"))
             {
-                StringTokenizer st = new StringTokenizer(br.readLine());
-                String name = st.nextToken();
-                String number = st.nextToken();
-                clients.add(new Client(name, number));
+                clients.add(new Client(br.readLine(), br.readLine()));
+            }
+            else if(dogOrCat.contains("adoption")) {
+                dogOrCat = br.readLine();
+                if(dogOrCat.contains("Dog")) {
+                    adoptions.put(new Dog(DogBreed.valueOf(br.readLine()), br.readLine(), Gender.valueOf(br.readLine()), Integer.parseInt(br.readLine())), new Client(br.readLine(), br.readLine()));
+                }
+                else if (dogOrCat.contains("Cat")) {
+                    adoptions.put(new Cat(CatBreed.valueOf(br.readLine()), br.readLine(), Gender.valueOf(br.readLine()), Integer.parseInt(br.readLine())), new Client(br.readLine(), br.readLine()));
+                }
+                else if (dogOrCat.contains("Pig")) {
+                    adoptions.put(new Pig(PigBreed.valueOf(br.readLine()), br.readLine(), Gender.valueOf(br.readLine()), Integer.parseInt(br.readLine())), new Client(br.readLine(), br.readLine()));
+                }
             }
         }
     }
     public void save(BufferedWriter bw) throws IOException{
         bw.write("" + name + '\n');
-        int size = animals.size() + clients.size();
+        int size = animals.size() + clients.size() + adoptions.size();
         bw.write("" + size + '\n');
         for(Animal a : animals) {
             bw.write("" + a.getClass() + '\n');
@@ -55,8 +64,22 @@ public class Shelter {
             bw.write("" + a.age() + '\n');
         }
         for(Client i : clients) {
+            StringTokenizer st = new StringTokenizer(i.toString(), " ");
+            String name = st.nextToken();
+            String number = st.nextToken();
             bw.write("" + "client" + '\n');
-            bw.write("" + i.toString() + '\n');
+            bw.write("" + name + '\n');
+            bw.write("" + number + '\n');
+        }
+        Set<Animal> keys = adoptions.keySet();
+        for(Animal k : keys) {
+            bw.write("adoption" + '\n');
+            bw.write("" + k.getClass() + '\n');
+            bw.write("" + k.breed() + '\n');
+            bw.write("" + k.name() + '\n');
+            bw.write("" + k.gender() + '\n');
+            bw.write("" + k.age() + '\n');
+            bw.write("" + adoptions.get(k) + '\n');
         }
         
     }
