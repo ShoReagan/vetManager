@@ -88,7 +88,7 @@ public class FindMinHash {
         // Replace this single line with code creating your threads
         Thread threads[] = new Thread[numThreads];
         for(int i = 0; i < numThreads; i++) {
-            threads[i] = new Thread(() -> findMinHash.search(0, maxHashes / i + 1));
+            threads[i] = new Thread(() -> findMinHash.search(i * maxHashes, maxHashes / i));
         }
         
         System.out.println("Best word \"" + findMinHash.bestWord.word + "\" has hashCode " 
