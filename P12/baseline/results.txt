@@ -42,7 +42,84 @@ sys	0m0.289s
 
 YOUR Timing:
 
+real	0m0.159s
+user	0m0.116s
+sys	0m0.030s
+Best word "default" has hashCode 1,503,201,889
 
+real	0m0.153s
+user	0m0.118s
+sys	0m0.025s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.156s
+user	0m0.113s
+sys	0m0.034s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.155s
+user	0m0.101s
+sys	0m0.040s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.157s
+user	0m0.119s
+sys	0m0.030s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.149s
+user	0m0.088s
+sys	0m0.052s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.149s
+user	0m0.095s
+sys	0m0.045s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.150s
+user	0m0.111s
+sys	0m0.029s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.156s
+user	0m0.100s
+sys	0m0.046s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.150s
+user	0m0.096s
+sys	0m0.044s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.157s
+user	0m0.113s
+sys	0m0.032s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.160s
+user	0m0.118s
+sys	0m0.027s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.158s
+user	0m0.110s
+sys	0m0.033s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.162s
+user	0m0.112s
+sys	0m0.039s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.148s
+user	0m0.091s
+sys	0m0.047s
+Best word "default" has hashCode 1,503,201,889
+
+real	0m0.151s
+user	0m0.116s
+sys	0m0.026s
 
 
 QUESTION 3: Does adding more threads continue to speed up the program? Do more threads ever slow down the program slightly?  Why or why not?

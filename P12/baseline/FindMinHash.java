@@ -77,7 +77,7 @@ public class FindMinHash {
         
         FindMinHash f = null;
         try {
-            f = new FindMinHash((args.length > 1) ? args[1] : "all-words.txt");
+            f = new FindMinHash("all-words.txt");
         } catch(IOException e) {
             System.err.println(e.getMessage());
             System.exit(-2);            
@@ -88,9 +88,11 @@ public class FindMinHash {
         // Replace this single line with code creating your threads
         Thread threads[] = new Thread[numThreads];
         for(int i = 0; i < numThreads; i++) {
-            threads[i] = new Thread(() -> findMinHash.search(i * maxHashes, maxHashes / i));
+            final long start = i * (maxHashes / numThreads);
+            final long end = start + (maxHashes / numThreads);
+            threads[i] = new Thread(() -> findMinHash.search(start, end));
         }
-        
+        //new Thread(() -> findMinHash.search(0, maxHashes));
         System.out.println("Best word \"" + findMinHash.bestWord.word + "\" has hashCode " 
                          + String.format("%,d", findMinHash.bestWord.hashCode()));
     }
